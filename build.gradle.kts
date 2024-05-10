@@ -10,7 +10,7 @@ version = "1.0.0"
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 labyMod {
-    defaultPackageName = "dk.nydt" //change this to your main package name (used by all modules)
+    defaultPackageName = "dk.nydt.autofish" //change this to your main package name (used by all modules)
     addonInfo {
         namespace = "autofish"
         displayName = "AutoFish"

@@ -1,15 +1,15 @@
-package org.example.core.listener;
+package dk.nydt.autofish.listener;
 
+import dk.nydt.autofish.AutoFishAddon;
 import net.labymod.api.event.Phase;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.lifecycle.GameTickEvent;
-import org.example.core.ExampleAddon;
 
-public class ExampleGameTickListener {
+public class AutoFishGameTickListener {
 
-  private final ExampleAddon addon;
+  private final AutoFishAddon addon;
 
-  public ExampleGameTickListener(ExampleAddon addon) {
+  public AutoFishGameTickListener(AutoFishAddon addon) {
     this.addon = addon;
   }
 

@@ -4,17 +4,19 @@ plugins {
     id("net.labymod.gradle.addon")
 }
 
-group = "org.example"
+group = "dk.nydt"
 version = "1.0.0"
 
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+
 labyMod {
-    defaultPackageName = "org.example" //change this to your main package name (used by all modules)
+    defaultPackageName = "dk.nydt" //change this to your main package name (used by all modules)
     addonInfo {
-        namespace = "example"
-        displayName = "ExampleAddon"
-        author = "Example Author"
-        description = "Example Description"
-        minecraftVersion = "*"
+        namespace = "autofish"
+        displayName = "AutoFish"
+        author = "Nydt"
+        description = "Autofish for LabyMod - Minecraft 1.8.9"
+        minecraftVersion = "1.8.9"
         version = System.getenv().getOrDefault("VERSION", "0.0.1")
     }
 

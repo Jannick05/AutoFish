@@ -1,12 +1,12 @@
-package org.example.core.commands;
+package dk.nydt.autofish.commands;
 
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;
 import net.labymod.api.client.component.format.NamedTextColor;
 
-public class ExamplePingSubCommand extends SubCommand {
+public class AutoFishPingSubCommand extends SubCommand {
 
-  protected ExamplePingSubCommand() {
+  protected AutoFishPingSubCommand() {
     super("pong");
   }
 

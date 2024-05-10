@@ -1,7 +1,7 @@
 {
-  "example": {
+  "autofish": {
     "settings": {
-      "name": "ExampleAddon",
+      "name": "AutoFish",
       "enabled": {
         "name": "Enabled"
       }

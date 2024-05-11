@@ -1,4 +1,4 @@
-package dk.nydt.autofish.commands;
+package dk.nydt.autofish.core.commands;
 
 import net.labymod.api.client.chat.command.SubCommand;
 import net.labymod.api.client.component.Component;

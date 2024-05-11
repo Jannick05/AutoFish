@@ -1,8 +1,8 @@
-package dk.nydt.autofish;
+package dk.nydt.autofish.core;
 
+import dk.nydt.autofish.core.commands.AutoFishPingCommand;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.models.addon.annotation.AddonMain;
-import dk.nydt.autofish.commands.AutoFishPingCommand;
 
 @AddonMain
 public class AutoFishAddon extends LabyAddon<AutoFishConfiguration> {

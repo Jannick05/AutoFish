@@ -4,7 +4,7 @@ plugins {
     id("net.labymod.gradle.addon")
 }
 
-group = "dk.nydt"
+group = "dk.nydt.autofish"
 version = "1.0.0"
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))

@@ -1,6 +1,6 @@
-package dk.nydt.autofish.listener;
+package dk.nydt.autofish.core.listener;
 
-import dk.nydt.autofish.AutoFishAddon;
+import dk.nydt.autofish.core.AutoFishAddon;
 import net.labymod.api.event.Phase;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.lifecycle.GameTickEvent;

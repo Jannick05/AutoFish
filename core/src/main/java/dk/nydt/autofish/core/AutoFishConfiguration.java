@@ -1,4 +1,4 @@
-package dk.nydt.autofish;
+package dk.nydt.autofish.core;
 
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;

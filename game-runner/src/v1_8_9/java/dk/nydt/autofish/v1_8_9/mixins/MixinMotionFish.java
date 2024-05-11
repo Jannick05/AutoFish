@@ -13,34 +13,44 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 @Mixin(NetHandlerPlayClient.class)
 public class MixinMotionFish {
+
+  private static final double XZ_MOTION_THRESHOLD = 0.0D;
+  private static final double Y_MOTION_THRESHOLD = 0.02D;
+  private static final long SCHEDULE_DELAY = 100;
   @Shadow
   private Minecraft gameController;
 
   @Inject(method = "handleEntityVelocity", at = @At("HEAD"))
   public void fish(S12PacketEntityVelocity packetIn, CallbackInfo ci) {
-    if (!(AutoFishAddon.instance.configuration().method().get().equals(MethodEnum.MOTION))) return;
-    if (gameController.thePlayer == null) return;
-    if (gameController.thePlayer.fishEntity == null) return;
-    System.out.println("packetIn.getEntityID(): " + packetIn.getEntityID());
-    System.out.println("fishEntity.getEntityId(): " + gameController.thePlayer.fishEntity.getEntityId());
-    if (gameController.thePlayer.fishEntity.getEntityId() != packetIn.getEntityID()) return;
+    if (!(AutoFishAddon.instance.configuration().method().get().equals(MethodEnum.MOTION)))
+      return;
+    if (gameController.thePlayer == null)
+      return; //Returns if player is null
+    if (gameController.thePlayer.fishEntity == null)
+      return; //Returns if fishEntity is null
+    if (gameController.thePlayer.fishEntity.getEntityId() != packetIn.getEntityID())
+      return; //Returns if player's fishEntity ID is not equal to packet entity ID
     EntityFishHook fishEntity = gameController.thePlayer.fishEntity;
-    if(fishEntity.motionX != 0.0D || fishEntity.motionZ != 0.0D) return;
-    if(fishEntity.motionY < 0.02D) return;
-    System.out.println("fishEntity.motionX: " + fishEntity.motionX);
-    System.out.println("fishEntity.motionY: " + fishEntity.motionY);
-    System.out.println("fishEntity.motionZ: " + fishEntity.motionZ);
-    Laby.labyAPI().taskExecutor().getScheduledPool().schedule(new Runnable() {
-      @Override
-      public void run() {
-        autoFish$processHook();
+
+    //Wait for the hook to not be moving
+    final ScheduledFuture<?>[] futureHolder = new ScheduledFuture<?>[1];
+    futureHolder[0] = Laby.labyAPI().taskExecutor().getScheduledPool().scheduleAtFixedRate(() -> {
+      if (fishEntity.motionX < XZ_MOTION_THRESHOLD && fishEntity.motionY < Y_MOTION_THRESHOLD
+          && fishEntity.motionZ < XZ_MOTION_THRESHOLD) {
+        //Hook is not moving, check for Y motion
+        if (fishEntity.motionY < Y_MOTION_THRESHOLD) {
+          autoFish$processHook();
+          futureHolder[0].cancel(false); //Cancel the scheduled task
+        }
       }
-    }, 100, TimeUnit.MILLISECONDS);
+    }, SCHEDULE_DELAY, SCHEDULE_DELAY, TimeUnit.MILLISECONDS);
   }
+
 
   @Unique
   private void autoFish$processHook() {

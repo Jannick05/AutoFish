@@ -16,9 +16,16 @@ public class MixinFish {
   private Minecraft gameController;
   @Inject(method = "handleSoundEffect", at = @At("HEAD"))
   public void fish(S29PacketSoundEffect packetIn, CallbackInfo ci) {
-    System.out.println("Sound: " + packetIn.getSoundName());
+    double HOOKSOUND_DISTANCESQ_THRESHOLD = 25D;
     if(packetIn.getSoundName().equals("random.splash")) {
-      gameController.playerController.sendUseItem(gameController.thePlayer, gameController.theWorld, gameController.thePlayer.getHeldItem());
+      if(gameController.thePlayer == null || gameController.thePlayer.fishEntity == null) return;
+      double x, y, z;
+      x = packetIn.getX();
+      y = packetIn.getY();
+      z = packetIn.getZ();
+      if(gameController.thePlayer.fishEntity.getDistanceSq(x, y, z) < HOOKSOUND_DISTANCESQ_THRESHOLD) {
+        gameController.playerController.sendUseItem(gameController.thePlayer, gameController.theWorld, gameController.thePlayer.getHeldItem());
+      }
     }
   }
 }

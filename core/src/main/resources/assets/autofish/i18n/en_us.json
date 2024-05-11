@@ -4,6 +4,14 @@
       "name": "AutoFish",
       "enabled": {
         "name": "Enabled"
+      },
+      "method": {
+        "name": "Method",
+        "entries": {
+          "sound": "Sound",
+          "motion": "Motion",
+          "both": "Both"
+        }
       }
     }
   }

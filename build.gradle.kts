@@ -18,6 +18,7 @@ labyMod {
         description = "Autofish for LabyMod - Minecraft 1.8.9"
         minecraftVersion = "1.8.9"
         version = System.getenv().getOrDefault("VERSION", "0.0.1")
+        iconUrl = "https://i.imgur.com/buJ8N6H.png"
     }
 
     minecraft {

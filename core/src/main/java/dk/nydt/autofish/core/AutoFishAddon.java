@@ -6,8 +6,11 @@ import net.labymod.api.models.addon.annotation.AddonMain;
 
 @AddonMain
 public class AutoFishAddon extends LabyAddon<AutoFishConfiguration> {
+  public static AutoFishAddon instance;
   @Override
   protected void enable() {
+
+    instance = this;
 
     this.registerSettingCategory();
 

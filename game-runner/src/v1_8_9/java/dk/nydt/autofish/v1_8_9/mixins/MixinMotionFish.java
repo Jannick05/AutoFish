@@ -25,30 +25,21 @@ public class MixinMotionFish {
     if (!(AutoFishAddon.instance.configuration().method().get().equals(MethodEnum.MOTION))) return;
     if (gameController.thePlayer == null) return;
     if (gameController.thePlayer.fishEntity == null) return;
-    //System.out.println("packetIn.getEntityID(): " + packetIn.getEntityID());
-    //System.out.println("gameController.thePlayer.fishEntity.getEntityId(): " + gameController.thePlayer.fishEntity.getEntityId());
+    System.out.println("packetIn.getEntityID(): " + packetIn.getEntityID());
+    System.out.println("fishEntity.getEntityId(): " + gameController.thePlayer.fishEntity.getEntityId());
     if (gameController.thePlayer.fishEntity.getEntityId() != packetIn.getEntityID()) return;
     EntityFishHook fishEntity = gameController.thePlayer.fishEntity;
-    System.out.println("fishEntity.motionX: " + Math.abs(fishEntity.motionX));
+    if(fishEntity.motionX != 0.0D || fishEntity.motionZ != 0.0D) return;
+    if(fishEntity.motionY < 0.02D) return;
+    System.out.println("fishEntity.motionX: " + fishEntity.motionX);
     System.out.println("fishEntity.motionY: " + fishEntity.motionY);
-    System.out.println("fishEntity.motionZ: " + Math.abs(fishEntity.motionZ));
-    while (Math.abs(fishEntity.motionX) < 0.01D && Math.abs(fishEntity.motionZ) < 0.01D) {
-      Laby.labyAPI().taskExecutor().getScheduledPool().schedule(new Runnable() {
-        @Override
-        public void run() {
-        }
-      }, 100, TimeUnit.MILLISECONDS);
-    }
-    System.out.println("parsed X Z");
-    if (fishEntity.motionY > 0.02D) {
-      System.out.println("parsed Y");
-      Laby.labyAPI().taskExecutor().getScheduledPool().schedule(new Runnable() {
-        @Override
-        public void run() {
-          autoFish$processHook();
-        }
-      }, 100, TimeUnit.MILLISECONDS);
-    }
+    System.out.println("fishEntity.motionZ: " + fishEntity.motionZ);
+    Laby.labyAPI().taskExecutor().getScheduledPool().schedule(new Runnable() {
+      @Override
+      public void run() {
+        autoFish$processHook();
+      }
+    }, 100, TimeUnit.MILLISECONDS);
   }
 
   @Unique

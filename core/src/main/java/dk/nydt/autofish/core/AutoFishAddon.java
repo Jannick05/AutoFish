@@ -1,6 +1,7 @@
 package dk.nydt.autofish.core;
 
 import dk.nydt.autofish.core.commands.AutoFishPingCommand;
+import dk.nydt.autofish.core.listener.AutoFishPlayerInteractListener;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.models.addon.annotation.AddonMain;
 
@@ -15,6 +16,7 @@ public class AutoFishAddon extends LabyAddon<AutoFishConfiguration> {
     this.registerSettingCategory();
 
     this.registerCommand(new AutoFishPingCommand());
+    this.registerListener(new AutoFishPlayerInteractListener(this));
 
     this.logger().info("Enabled the Addon");
   }

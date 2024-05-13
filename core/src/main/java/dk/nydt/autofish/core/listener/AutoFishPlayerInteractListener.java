@@ -12,8 +12,6 @@ import java.util.concurrent.TimeUnit;
 public class AutoFishPlayerInteractListener {
 
   private final AutoFishAddon addon;
-
-  public static boolean CHECK_HOOK = false;
   public static boolean ROD_CASTED = false;
 
   public AutoFishPlayerInteractListener(AutoFishAddon addon) {
